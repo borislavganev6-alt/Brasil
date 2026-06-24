@@ -1,116 +1,685 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <meta charset="UTF-8">
-    <title>Бразилия - Калоян Златев</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бразилия – Ритъм, Природа и Страст</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            background: linear-gradient(#eaffea, #fff7cc);
-        }
+    :root {
+      --green:  #009c3b;
+      --yellow: #ffdf00;
+      --blue:   #002776;
+      --bg:     #fffdf0;
+      --text:   #1a1a1a;
+      --card-bg:#ffffff;
+    }
 
-        .header {
-            background: linear-gradient(green, yellow);
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
+    html { scroll-behavior: smooth; }
 
-        section {
-            margin: 20px;
-            padding: 20px;
-            border-radius: 15px;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-        img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(0,39,118,0.92);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--yellow);
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: #ffffffcc;
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
 
-        h2 {
-            color: #0b6b0b;
-        }
+    /* ── HERO ── */
+    #home {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,39,118,.55) 0%, rgba(0,156,59,.3) 100%),
+        url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1600&q=80') center/cover no-repeat;
+      animation: zoomSlow 18s ease-in-out infinite alternate;
+    }
+    @keyframes zoomSlow {
+      from { transform: scale(1); }
+      to   { transform: scale(1.06); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding: 2rem;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--blue);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: .35rem 1.1rem;
+      border-radius: 2rem;
+      margin-bottom: 1.4rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.12;
+      text-shadow: 0 2px 24px rgba(0,0,0,.4);
+      margin-bottom: 1.4rem;
+    }
+    .hero-title span { color: var(--yellow); }
+    .hero-desc {
+      color: rgba(255,255,255,.88);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto 2.2rem;
+    }
+    .btn-hero {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 1rem 2.8rem;
+      border-radius: 3rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .18s, box-shadow .18s, background .2s;
+      box-shadow: 0 6px 28px rgba(255,223,0,.45);
+    }
+    .btn-hero:hover {
+      background: #ffe833;
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 10px 36px rgba(255,223,0,.65);
+    }
+    .btn-hero:active {
+      transform: scale(.96);
+      box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    }
+    .scroll-arrow {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,.7);
+      animation: bounce 2s infinite;
+      font-size: 1.8rem;
+      z-index: 2;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(10px); }
+    }
 
-        .nature { background: #d6ffd6; }
-        .cities { background: #d6e6ff; }
-        .culture { background: #ffe0f0; }
-        .football { background: #fff3b0; }
-        .history { background: #e0d4ff; }
-        .tourism { background: #ffd9b3; }
-        .food { background: #caffea; }
-        .why { background: #ffffff; }
-    </style>
+    /* ── SECTIONS COMMON ── */
+    section { padding: 100px 2rem; }
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: 1rem;
+      line-height: 1.18;
+    }
+    .section-desc {
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 620px;
+      color: #444;
+      margin-bottom: 3rem;
+    }
+
+    /* fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.left  { transform: translateX(-50px); }
+    .reveal.right { transform: translateX(50px); }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── ATTRACTIONS ── */
+    #attractions { background: #fff; }
+    .attractions-inner { max-width: 1200px; margin: 0 auto; }
+    .cat-label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-left: 3px solid var(--yellow);
+      padding-left: .7rem;
+      margin-bottom: 1.4rem;
+      margin-top: 3rem;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.6rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transition: transform .25s, box-shadow .25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 14px 40px rgba(0,39,118,.13);
+    }
+    .card-img {
+      width: 100%; height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-body {
+      padding: 1.4rem 1.4rem 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: .5rem;
+    }
+    .card-text {
+      font-size: .9rem;
+      color: #555;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+    .btn-card {
+      align-self: flex-start;
+      background: var(--green);
+      color: #fff;
+      padding: .55rem 1.4rem;
+      border-radius: 2rem;
+      border: none;
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-card:hover {
+      background: var(--yellow);
+      color: var(--blue);
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(255,223,0,.4);
+    }
+    .btn-card:active { transform: scale(.95); }
+
+    /* ── CULTURE ── */
+    #culture { background: var(--bg); }
+    .culture-inner { max-width: 1100px; margin: 0 auto; }
+    .culture-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .culture-grid { grid-template-columns: 1fr; } }
+    .culture-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: .8rem;
+    }
+    .culture-block p {
+      font-size: .95rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 1.2rem;
+    }
+    .food-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .food-images img {
+      width: 100%; height: 160px;
+      object-fit: cover;
+      border-radius: .9rem;
+    }
+
+    /* samba button */
+    .btn-samba {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--blue);
+      color: var(--yellow);
+      font-weight: 700;
+      font-size: .95rem;
+      padding: .8rem 2rem;
+      border-radius: 3rem;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .18s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(0,39,118,.25);
+    }
+    .btn-samba:hover {
+      background: var(--green);
+      color: #fff;
+      transform: scale(1.04);
+    }
+    .btn-samba.playing {
+      background: var(--green);
+      color: #fff;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 4px 18px rgba(0,156,59,.3); }
+      50%      { box-shadow: 0 8px 32px rgba(0,156,59,.65); }
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: linear-gradient(135deg, var(--blue) 0%, #00408a 100%);
+      color: #fff;
+    }
+    .contact-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    #contact .section-label { color: var(--yellow); }
+    #contact .section-title { color: #fff; margin-bottom: .7rem; }
+    #contact .section-desc { color: rgba(255,255,255,.75); margin: 0 auto 2.5rem; }
+
+    .form-group { margin-bottom: 1.2rem; text-align: left; }
+    .form-group label {
+      display: block;
+      font-size: .85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.8);
+      margin-bottom: .4rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: .85rem 1.1rem;
+      border-radius: .75rem;
+      border: 2px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem;
+      transition: border-color .2s, background .2s;
+      outline: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.45); }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--yellow);
+      background: rgba(255,255,255,.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .btn-send {
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 3rem;
+      border-radius: 3rem;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-top: .5rem;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0,156,59,.35);
+    }
+    .btn-send:hover {
+      background: #00b544;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,156,59,.5);
+    }
+    .btn-send:active { transform: scale(.97); }
+    .btn-send.sent {
+      background: var(--yellow) !important;
+      color: var(--blue) !important;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #000d2e;
+      color: rgba(255,255,255,.6);
+      text-align: center;
+      padding: 2.5rem 1rem;
+    }
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background .2s, transform .18s;
+    }
+    .social-btn:hover {
+      background: var(--yellow);
+      color: var(--blue);
+      transform: scale(1.12);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--yellow);
+      font-size: 1.3rem;
+      font-weight: 900;
+      margin-bottom: .5rem;
+    }
+    .footer-copy { font-size: .8rem; }
+
+    /* ── RIPPLE ── */
+    .ripple-host { position: relative; overflow: hidden; }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: scale(0);
+      animation: rippleAnim .55s linear forwards;
+      background: rgba(255,255,255,.35);
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="header">
-    <h1>Бразилия</h1>
-    <h2>Калоян Златев</h2>
-</div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🇧🇷 Бразилия</div>
+  <ul class="nav-links">
+    <li><a href="#home">Начало</a></li>
+    <li><a href="#attractions">Чудеса</a></li>
+    <li><a href="#culture">Култура</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
+</nav>
 
-<section class="nature">
-    <h2>Природа</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Amazon_rainforest.jpg">
-    <p>Бразилия е известна с огромната Амазонска гора, която е една от най-богатите на биологично разнообразие места в света. Там живеят милиони различни видове животни и растения, които не се срещат никъде другаде.</p>
-    <p>Климатът е горещ и влажен през цялата година, което създава идеални условия за гъста растителност. Освен джунгли, Бразилия има и планини, реки и савани.</p>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content reveal">
+    <span class="hero-eyebrow">✦ Добре дошли в страната на карнавала</span>
+    <h1 class="hero-title">Бразилия:<br/><span>Където животът е танц</span></h1>
+    <p class="hero-desc">
+      Тук самбата звучи от всяко сърце, футболът е религия, а природата те спира с дъха.
+      Бразилия е страна, в която океанският бриз, тропическата джунгла и топлите усмивки
+      се сливат в едно незабравимо преживяване – пътешествие за душата и сетивата.
+    </p>
+    <a href="#attractions" class="btn-hero ripple-host" onclick="addRipple(event)">Усети ритъма ↓</a>
+  </div>
+  <div class="scroll-arrow">⌄</div>
 </section>
 
-<section class="cities">
-    <h2>Градове</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/S%C3%A3o_Paulo_city.jpg">
-    <p>Сао Пауло е най-големият град в Бразилия и един от най-големите в света. Той е важен икономически и индустриален център.</p>
-    <p>Рио де Жанейро е известен със своите плажове, планини и културни събития. Градовете са пълни с живот, хора и различни култури.</p>
+<!-- ATTRACTIONS -->
+<section id="attractions">
+  <div class="attractions-inner">
+    <div class="reveal left">
+      <p class="section-label">✦ Места, които отнемат дъха</p>
+      <h2 class="section-title">Чудесата на Бразилия</h2>
+      <p class="section-desc">От величествени статуи над облаците до непокътнати тропически гори – Бразилия крие красоти, за които думите не стигат.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="cat-label">Символите на Рио</div>
+      <div class="cards-grid">
+
+        <div class="card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1548963670-37c54344e856?w=700&q=80" alt="Статуята на Христос Спасителя" loading="lazy" />
+          <div class="card-body">
+            <div class="card-title">Христос Спасителят</div>
+            <p class="card-text">Едно от Новите седем чудеса на света. Издигащ се на 38 метра над Рио де Жанейро, той се превърна в символ на мира и надеждата, видян от целия свят.</p>
+            <a href="https://maps.app.goo.gl/Cristo" target="_blank" class="btn-card ripple-host" onclick="addRipple(event)">Разгледай →</a>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1571895954574-7dda5c28cc58?w=700&q=80" alt="Плажът Копакабана" loading="lazy" />
+          <div class="card-body">
+            <div class="card-title">Плаж Копакабана</div>
+            <p class="card-text">Може би най-известният плаж на планетата. Четири километра бял пясък, емблематичните мозаечни тротоари и вечно слънчевото небе над Рио.</p>
+            <a href="https://maps.app.goo.gl/Copacabana" target="_blank" class="btn-card ripple-host" onclick="addRipple(event)">Разгледай →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="cat-label">Дивата природа</div>
+      <div class="cards-grid">
+
+        <div class="card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=700&q=80" alt="Река Амазонка" loading="lazy" />
+          <div class="card-body">
+            <div class="card-title">Река Амазонка</div>
+            <p class="card-text">„Белите дробове на планетата" – гъста тропическа джунгла, криволичеща река и повече видове живи същества, отколкото на всяко друго място на Земята.</p>
+            <a href="https://maps.app.goo.gl/Amazon" target="_blank" class="btn-card ripple-host" onclick="addRipple(event)">Разгледай →</a>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img class="card-img" src="https://images.unsplash.com/photo-1519609878373-06d4c20571a8?w=700&q=80" alt="Водопадите Игуасу" loading="lazy" />
+          <div class="card-body">
+            <div class="card-title">Водопадите Игуасу</div>
+            <p class="card-text">275 водопада, разпрострени на 2,7 километра – природна сцена, толкова мощна, че Елинор Рузвелт възкликнала: „Беден Ниагара!" Несравнима гледка.</p>
+            <a href="https://maps.app.goo.gl/Iguazu" target="_blank" class="btn-card ripple-host" onclick="addRipple(event)">Разгледай →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="culture">
-    <h2>Култура</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Carnaval_Rio_2014.jpg">
-    <p>Бразилската култура е смесица от португалски, африкански и местни традиции. Това я прави много цветна и уникална.</p>
-    <p>Карнавалът в Рио е едно от най-известните събития в света. Музиката, танците и празненствата са важна част от живота на хората.</p>
+<!-- CULTURE -->
+<section id="culture">
+  <div class="culture-inner">
+    <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+      <p class="section-label">✦ Страстта е начин на живот</p>
+      <h2 class="section-title">Култура, Футбол и Храна</h2>
+    </div>
+    <div class="culture-grid">
+
+      <div class="culture-block reveal left">
+        <h3>⚽ Футбол & Карнавал</h3>
+        <p>Бразилия е петкратен световен шампион по футбол – рекорд, непостигнат от никоя друга нация. <strong>Селесао</strong> (националния тим) не е просто отбор, а национален символ, поколения легенди – Пеле, Роналдо, Нейман.</p>
+        <p>А <strong>Карнавалът в Рио</strong>? Пет нощи пищно шествие, 2 милиона танцьори по улиците, хиляди пера и блясък. Най-великото парти на планетата – живо, заразително, незабравимо.</p>
+        <button class="btn-samba" id="sambaBtn" onclick="toggleSamba()">
+          🥁 Пусни си самба ритъм
+        </button>
+        <audio id="sambaAudio" loop>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
+
+      <div class="culture-block reveal right">
+        <h3>🍽️ Бразилска кухня</h3>
+        <div class="food-images">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Чурраско – бразилска скара" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1528735597421-16f04e79c5c3?w=500&q=80" alt="Тропически плодове" loading="lazy" />
+        </div>
+        <p>Бразилската кухня е пир за сетивата. <strong>Фейжоада</strong> – черен боб с пушени меса – е националното ястие, яжте го с ориз и портокал. <strong>Чурраско</strong> (скарата) е ритуал – цели пет вида месо, сервирани директно от меч.</p>
+        <p>И за десерт: <strong>Бригадейро</strong> – шоколадови топчета, увити в захарна поръска. Прости, перфектни и обичани от всеки бразилец от детска градина нагоре.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section class="football">
-    <h2>Футбол</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Brazil_national_football_team_2018.jpg">
-    <p>Футболът е най-популярният спорт в Бразилия и е като религия за хората. Почти всяко дете мечтае да стане футболист.</p>
-    <p>Бразилия има много световни титли и е дала на света легенди като Пеле, Роналдо и Неймар.</p>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <p class="section-label">✦ Напиши ни</p>
+    <h2 class="section-title">Контакти & Споделяне</h2>
+    <p class="section-desc">Мечтаеш за Рио? Разкажи ни защо искаш да посетиш Бразилия – ще те вдъхновим как да го осъществиш.</p>
+
+    <div class="form-group">
+      <label for="name">Вашето име</label>
+      <input type="text" id="name" placeholder="Напр. Иван Петров" />
+    </div>
+    <div class="form-group">
+      <label for="email">Имейл адрес</label>
+      <input type="email" id="email" placeholder="ivan@example.com" />
+    </div>
+    <div class="form-group">
+      <label for="message">Защо искаш да посетиш Бразилия?</label>
+      <textarea id="message" placeholder="Разкажи ни мечтата си..."></textarea>
+    </div>
+    <button class="btn-send ripple-host" id="sendBtn" onclick="handleSend(event)">
+      Изпрати към Рио ✈️
+    </button>
+  </div>
 </section>
 
-<section class="history">
-    <h2>История</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Panorama_of_Brasilia.jpg">
-    <p>Бразилия е била колония на Португалия повече от 300 години. През 1822 година получава своята независимост.</p>
-    <p>След това се развива като една от най-големите държави в Южна Америка. Историята ѝ е богата и интересна.</p>
-</section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🇧🇷 Бразилия</div>
+  <div class="footer-socials">
+    <a href="https://github.com" target="_blank" class="social-btn" title="GitHub">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23A11.52 11.52 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.807 5.625-5.48 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.216.69.825.573C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    </a>
+    <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+    </a>
+    <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.532-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.885v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© 2025 Бразилия – Ритъм, Природа и Страст &nbsp;|&nbsp; Направено с ❤️ и самба</p>
+</footer>
 
-<section class="tourism">
-    <h2>Туризъм</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Christ_the_Redeemer_statue.jpg">
-    <p>Бразилия е много популярна туристическа дестинация заради природата, плажовете и културните събития.</p>
-    <p>Статуята на Христос Спасителя и Амазонската джунгла са едни от най-известните места в света.</p>
-</section>
+<script>
+  /* ── SCROLL REVEAL ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
 
-<section class="food">
-    <h2>Кухня</h2>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Feijoada.jpg">
-    <p>Бразилската кухня е разнообразна и вкусна, с влияние от различни култури. Основните храни са месо, ориз и боб.</p>
-    <p>Най-известното ястие е фейжоада – традиционно ястие с боб и месо, което е много популярно в страната.</p>
-</section>
+  /* ── RIPPLE ── */
+  function addRipple(e) {
+    const btn = e.currentTarget;
+    const circle = document.createElement('span');
+    const d = Math.max(btn.offsetWidth, btn.offsetHeight);
+    const rect = btn.getBoundingClientRect();
+    circle.classList.add('ripple');
+    circle.style.width = circle.style.height = d + 'px';
+    circle.style.left = (e.clientX - rect.left - d/2) + 'px';
+    circle.style.top  = (e.clientY - rect.top  - d/2) + 'px';
+    btn.appendChild(circle);
+    setTimeout(() => circle.remove(), 600);
+  }
 
-<section class="why">
-    <h2>Защо ми е любима Бразилия</h2>
-    <p>Бразилия ми е любима държава, защото е много красива и интересна. Харесвам нейната природа, култура и футбол.</p>
+  /* ── SAMBA ── */
+  let sambaPlaying = false;
+  function toggleSamba() {
+    const btn = document.getElementById('sambaBtn');
+    const audio = document.getElementById('sambaAudio');
+    sambaPlaying = !sambaPlaying;
+    if (sambaPlaying) {
+      audio.play().catch(() => {});
+      btn.textContent = '🎶 Музиката свири! (Спри)';
+      btn.classList.add('playing');
+    } else {
+      audio.pause();
+      btn.textContent = '🥁 Пусни си самба ритъм';
+      btn.classList.remove('playing');
+    }
+  }
 
-    <p>Това е страна, която винаги ми изглежда жива и пълна с енергия. Хората са усмихнати и обичат да празнуват и да се забавляват.</p>
-
-    <p>Също така Бразилия има невероятна природа като Амазонската гора и красиви плажове. Това я прави много специална и различна от другите държави.</p>
-
-    <p>Футболът е още една голяма причина да ми е любима, защото там са родени едни от най-великите играчи в света. Страната вдъхновява с успехите си, музиката си и начина си на живот.</p>
-</section>
-
+  /* ── SEND ── */
+  function handleSend(e) {
+    addRipple(e);
+    const btn = document.getElementById('sendBtn');
+    btn.classList.add('sent');
+    btn.textContent = 'Успешно изпратено! Приятно пътуване! ✈️';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.classList.remove('sent');
+      btn.textContent = 'Изпрати към Рио ✈️';
+      btn.disabled = false;
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    }, 4000);
+  }
+</script>
 </body>
 </html>
+
